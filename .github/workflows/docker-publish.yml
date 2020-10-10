@@ -25,9 +25,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ros-tooling/setup-ros@0.0.25
-        with:
-          required-ros-distribution: melodic
-      - name: Run tests
+      - name: Build package
         run: |
-          echo "test"
+          docker build .
