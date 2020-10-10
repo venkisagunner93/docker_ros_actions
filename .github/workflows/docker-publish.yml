@@ -21,7 +21,7 @@ jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
-    runs-on: ros:melodic-ros-core
+    runs-on: melodic-ros-core
 
     steps:
       - uses: actions/checkout@v2
