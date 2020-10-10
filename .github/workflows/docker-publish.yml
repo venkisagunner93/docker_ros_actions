@@ -20,11 +20,11 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build package
-        run: |
-          docker build .
+      - uses: ros-tooling/setup-ros@0.0.25
+        with:
+          required-ros-distributions: melodic
