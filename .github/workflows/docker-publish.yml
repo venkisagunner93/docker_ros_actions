@@ -2,17 +2,30 @@ name: Docker
 
 on:
   push:
+    # Publish `main` as Docker `latest` image.
     branches:
       - main
 
-runs-on: [ubuntu-18.04]
-strategy:
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  # TODO: Change variable to your image's name.
+  IMAGE_NAME: image
+
+jobs:
+  runs-on: [ubuntu-18.04]
+  strategy:
   matrix:
     compiler: ["/usr/bin/g++", "/usr/bin/clang++"]
-steps:
-- uses: actions/checkout@v1
-- uses: betwo/github-setup-catkin@v1.1.1
-  with:
-    ros-version: 'melodic'
-    workspace: '$GITHUB_WORKSPACE'
-- run: catkin_make_isolated -DCMAKE_C_COMPILER=${{ matrix.compiler }} -DCMAKE_CXX_COMPILER=${{ matrix.compiler }}
+  steps:
+  - uses: actions/checkout@v1
+  - uses: betwo/github-setup-catkin@v1.1.1
+    with:
+      ros-version: 'melodic'
+      workspace: '$GITHUB_WORKSPACE'
+  - run: catkin_make_isolated -DCMAKE_C_COMPILER=${{ matrix.compiler }} -DCMAKE_CXX_COMPILER=${{ matrix.compiler }}
