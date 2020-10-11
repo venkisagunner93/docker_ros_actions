@@ -27,4 +27,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: docker build
         run: |
-          ls && docker build .
+          cd .. && ls && cd .. && ls && cd .. && ls
